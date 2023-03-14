@@ -15,9 +15,9 @@
 
 
 import numpy as np
+import pandas as pd
 from itertools import combinations
 import bisect
-import main
 
 
 class ConsensusCluster:
@@ -82,7 +82,7 @@ class ConsensusCluster:
                 resampled_indices, resample_data = self._internal_resample(
                     data, self.resample_proportion_)
 
-                df_con = main.pd.concat([df_numeric, df_categorical], axis=1).iloc[resampled_indices, :]
+                df_con = pd.concat([df_numeric, df_categorical], axis=1).iloc[resampled_indices, :]
                 mark_array = df_con.values
                 categorical_features_idx = [df_con.columns.get_loc(a) for a in df_categorical.columns if
                                             a in df_categorical.columns]

@@ -2,6 +2,7 @@ import sys
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import PowerTransformer
+from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
 
@@ -83,12 +84,12 @@ def create_full_dfs(df_numeric,df_categorical, imputer_num=IterativeImputer(rand
 
 if __name__ == '__main__':
     path_to_file = sys.argv[1]  # a csv file of the full data
-    conti_variables = sys.argv[2]  # a list of all continuous variables
-    cat_variables = sys.argv[3]  # a list of all categorical variables
+    conti_variables = sys.argv[2].split(',')  # a list of all continuous variables
+    cat_variables = sys.argv[3].split(',')  # a list of all categorical variables
     path_to_save = sys.argv[4]  # path to save the full data frames that are ready to work
 
 
-    original_data = pd.read_csv(path_to_file)
+    original_data = pd.read_csv(path_to_file, index_col=0)
     df_con = original_data[conti_variables].copy()  # data frame with continuous variables only
     df_cat = original_data[cat_variables].copy()  # data frame with categorical variables only
 
